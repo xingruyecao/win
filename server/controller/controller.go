@@ -11,9 +11,11 @@ func New() *http.ServeMux {
 }
 
 func Register(sm *http.ServeMux) {
-	sm.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	sm.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Write([]byte("首页"))
 	}))
 	sm.HandleFunc("/upload", upLoad)
 	sm.HandleFunc("/test", test)
+	sm.HandleFunc("/getdownurl", getDownUrl)
+	sm.HandleFunc("/getfile", getAllFile)
 }

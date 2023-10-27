@@ -8,4 +8,5 @@ type RequestData struct {
 type ResponseData struct {
 	Status  int    `json:"status"`
 	Mess string `json:"mess"`
+	Data interface{} `json:"data"`
 }

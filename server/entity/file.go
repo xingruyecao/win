@@ -1,6 +1,8 @@
 package entity
 
 type FileEntity struct {
-	Path string `json:"path"`
+	UpPath string `json:"uppath"`
 	Key string `json:"key"`
+	DownUrl string `json:"downurl"`
+	Prefix string `json:"prefix"`
 }

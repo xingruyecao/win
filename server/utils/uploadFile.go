@@ -2,13 +2,20 @@ package utils
 
 import (
 	// "github.com/qiniu/go-sdk/v7/auth/qbox"
-    "github.com/qiniu/go-sdk/v7/storage"
-	"fmt"
 	"QN/entity"
 	"context"
+	"errors"
+	"fmt"
+	"net/url"
+
+	"github.com/qiniu/go-sdk/v7/storage"
 )
 
-func UploadFile(upToken string, localFile string, key string) (string, int){
+func UploadFile(file entity.FileEntity) (string, int){
+	localFile := file.UpPath
+	if localFile == ""{
+		return errors.New("The upload file path is illegal!").Error(), 404
+	}
 	cfg := storage.Config{}
 	formUploader := storage.NewFormUploader(&cfg)
 	ret := entity.PutpetEntity{}
@@ -17,6 +24,7 @@ func UploadFile(upToken string, localFile string, key string) (string, int){
 			"x:name": "XTU",
 		},
 	}
+	key, _ := url.JoinPath(file.Prefix, file.Key)
 	err := formUploader.PutFile(context.Background(), &ret, upToken, key, localFile, &putExtra)
 	if err != nil {
 		fmt.Println(err)
