@@ -4,6 +4,7 @@ import (
 	"QN/entity"
 	"QN/service"
 	"QN/utils"
+	"errors"
 	"net/http"
 )
 
@@ -14,10 +15,12 @@ func getAllFile(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	prefix := r.URL.Query().Get("prefix")
-	fileEntityList, err := service.GetFileFromPrefix(prefix)
+	fileEntityListMap, err := service.GetFileFromPrefix(prefix)
 	status := 200
-	if len(fileEntityList) == 0 {
+	err = errors.New("SUCCESS")
+	if len(fileEntityListMap) == 0 {
 		status = 403
+		err = errors.New("The data queried is empty!")
 	}
-	utils.SendJSONResponse(w, entity.ResponseData{Mess: err.Error(), Status: status, Data: fileEntityList})
+	utils.SendJSONResponse(w, entity.ResponseData{Mess: err.Error(), Status: status, Data: fileEntityListMap})
 }
