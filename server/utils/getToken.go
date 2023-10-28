@@ -9,7 +9,7 @@ import (
 
 var mac *auth.Credentials
 var upToken string
-var timeLimit int = 7200
+var timeLimit int = 3600
 var bucket string = "winmax"
 var domain string = "s34kk0k9i.hn-bkt.clouddn.com"
 var bucketManager *storage.BucketManager 
