@@ -40,3 +40,7 @@ func GetBM() *storage.BucketManager{
 func GetBucket() string{
 	return bucket
 }
+
+func GetUptoken() string{
+	return upToken
+}
